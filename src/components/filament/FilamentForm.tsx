@@ -161,6 +161,14 @@ export function FilamentForm({ initial, onClose }: FilamentFormProps) {
         onAddNew={() => false} // not used — custom slot handles adding
         getKey={(c) => c.id}
         getLabel={(c) => c.name}
+        searchable
+        renderOption={(color) => (
+          <span className="flex items-center gap-2">
+            <ColorSwatch hex={color.hex} size="sm" />
+            <span>{color.name}</span>
+            <span className="font-mono text-xs text-gray-400">{color.hex}</span>
+          </span>
+        )}
         addNewSlot={(cancelFn) => (
           <ColorPicker
             existingHexes={state.colors.map((c) => c.hex)}
@@ -172,7 +180,7 @@ export function FilamentForm({ initial, onClose }: FilamentFormProps) {
           />
         )}
         error={errors.colorId}
-        placeholder="Select color…"
+        placeholder="Search colors…"
       />
 
       {selectedColor && (
